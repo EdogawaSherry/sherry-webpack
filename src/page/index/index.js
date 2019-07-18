@@ -1,5 +1,14 @@
 // import './index.css'
-import './index.styl'
+import './index.styl';
+import Header from 'common/tpl/header';
+import Test from './tpl/test';
+
+// console.log(Header);
+const header = new Header({ title: '你好' });
+console.log(header.create());
+
+const test = new Test({ name: '皮卡丘' });
+console.log(test.create());
 
 class Person {
     constructor(name) {
@@ -14,6 +23,7 @@ class A extends Person {
 }
 const a = new A(1, 'ff');
 let b = new A(2, '22');
+console.log(a);
 
 const demo1 = new Promise((resolve, reject) => {
     setTimeout(() => {

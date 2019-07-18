@@ -2,7 +2,7 @@
  * @Author: YeLuochen
  * @Date: 2019-07-17 15:02:14
  * @Last Modified by: YeLuochen
- * @Last Modified time: 2019-07-17 17:27:13
+ * @Last Modified time: 2019-07-18 14:20:10
  * @Description: base
  */
 const path = require('path');
@@ -29,20 +29,28 @@ module.exports = {
     resolve: {
         extensions: ['.js'],
         alias: {
-            'common': path.resolve(__dirname, '../src/common'),
-            'tpl': path.resolve(__dirname, '../src/tpl')
+            common: path.resolve(__dirname, '../src/common'),
+            tpl: path.resolve(__dirname, '../src/tpl')
         }
     },
     module: {
         rules: [
             ...utils.styleLoader(),
             {
-                // 对js文件使用loader
                 test: /\.js$/,
+                loader: [
+                    'babel-loader',
+                    {
+                        loader: 'eslint-loader',
+                        options: {
+                            formatter: require('eslint-friendly-formatter'),
+                            emitWarning: true
+                        }
+                    }
+                ],
+                enforce: 'pre',
                 exclude: path.join(__dirname, '../node_modules'),
-                // 仅仅解析
-                include: path.join(__dirname, '../src'),
-                use: 'babel-loader'
+                include: [path.resolve(__dirname, '../src')]
             },
             {
                 test: /\.html$/,
@@ -51,6 +59,11 @@ module.exports = {
                     // 标签+属性
                     attrs: ['img:src', 'audio:src', 'video:src']
                 }
+            },
+            {
+                // 对模版文件使用loader
+                test: /\.tpl$/,
+                use: 'ejs-loader'
             },
             {
                 // 对下列资源文件使用loader
@@ -76,4 +89,4 @@ module.exports = {
     plugins: [
 
     ]
-}
+};

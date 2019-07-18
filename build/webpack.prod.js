@@ -2,7 +2,7 @@
  * @Author: YeLuochen
  * @Date: 2019-07-17 15:29:42
  * @Last Modified by: YeLuochen
- * @Last Modified time: 2019-07-17 17:41:29
+ * @Last Modified time: 2019-07-18 11:31:49
  * @Description: 生产
  */
 process.env.NODE_ENV = 'production';
@@ -22,8 +22,6 @@ const pageConfig = require('./page.config.js');
 rm(path.join(__dirname, '../dist'), (err) => {
     if (err) throw err;
 });
-
-
 
 module.exports = new Promise((resolve) => {
 	// 异步获取得到多页面的entries入口配置和htmlPlugin插件配置
