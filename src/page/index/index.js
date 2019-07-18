@@ -2,10 +2,14 @@
 import './index.styl';
 import Header from 'common/tpl/header';
 import Test from './tpl/test';
+import { sayHello } from 'common/js/test';
+import 'common/style/test.styl';
 
+sayHello();
 // console.log(Header);
 const header = new Header({ title: '你好' });
-console.log(header.create());
+$('#header').html(header.create());
+// console.log(header.create());
 
 const test = new Test({ name: '皮卡丘' });
 console.log(test.create());
@@ -22,7 +26,7 @@ class A extends Person {
     }
 }
 const a = new A(1, 'ff');
-let b = new A(2, '22');
+// let b = new A(2, '22');
 console.log(a);
 
 const demo1 = new Promise((resolve, reject) => {

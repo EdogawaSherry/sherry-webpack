@@ -12,7 +12,6 @@ module.exports = {
     prod: {
         staticDir: 'static',
         publicPath: './',
-        sourceMap: false,
         minimize: false
     }
 };

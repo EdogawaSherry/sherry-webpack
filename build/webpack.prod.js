@@ -2,7 +2,7 @@
  * @Author: YeLuochen
  * @Date: 2019-07-17 15:29:42
  * @Last Modified by: YeLuochen
- * @Last Modified time: 2019-07-18 11:31:49
+ * @Last Modified time: 2019-07-18 16:16:54
  * @Description: 生产
  */
 process.env.NODE_ENV = 'production';
@@ -22,28 +22,49 @@ const pageConfig = require('./page.config.js');
 rm(path.join(__dirname, '../dist'), (err) => {
     if (err) throw err;
 });
+const minimizer = [];
+// 需要压缩
+if (config.prod.minimize) {
+	minimizer.push(
+		new UglifyJsPlugin({
+			cache: true,
+			parallel: true,
+			uglifyOptions: {
+				compress: {
+					drop_console: true,
+					reduce_vars: true
+				}
+			}
+		}),
+		new OptimizeCSSAssetsPlugin({})
+	);
+} 
 
 module.exports = new Promise((resolve) => {
 	// 异步获取得到多页面的entries入口配置和htmlPlugin插件配置
 	pageConfig.readPage().then((pageInfo) => {
 		resolve(merge(baseWebpack, {
             entry: pageInfo.entries,
-			devtool: config.prod.sourceMap && 'inline-source-map',
 			optimization: {
-				minimizer: [
-					new UglifyJsPlugin({
-						cache: true,
-						parallel: true,
-						sourceMap: config.prod.sourceMap,
-						uglifyOptions: {
-							compress: {
-								drop_console: true,
-								reduce_vars: true
-							}
+				splitChunks: {
+					// 抽离的时候除了被引用次数大于等于minChunks外，如果抽离出来的大小小于minSize(默认3000B)也不会被抽离
+					cacheGroups: {
+						commonjs: {
+							chunks: 'all',
+							name: 'common',
+							test: /\.js$/,
+							minChunks: 3
+							// minSize: 3000
+						},
+						commoncss: {
+							chunks: 'all',
+							name: 'common',
+							test: /\.(css|scss|styl|less)$/,
+							minChunks: 3
 						}
-					}),
-					new OptimizeCSSAssetsPlugin({})
-				]
+					}
+				},
+				minimizer: [...minimizer]
 			},
 			plugins: [
 				...pageInfo.htmlPlugin,

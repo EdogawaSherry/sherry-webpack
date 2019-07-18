@@ -2,25 +2,16 @@
  * @Author: YeLuochen
  * @Date: 2019-07-17 15:02:14
  * @Last Modified by: YeLuochen
- * @Last Modified time: 2019-07-18 14:20:10
+ * @Last Modified time: 2019-07-18 15:51:37
  * @Description: base
  */
 const path = require('path');
+const webpack = require('webpack');
 const utils = require('./utils');
 const config = require('./config');
 
 module.exports = {
-    stats: {
-        // copied from `'minimal'`
-        // all: false,
-        modules: true,
-        maxModules: 0,
-        errors: true,
-        warnings: true,
-        // our additional options
-        moduleTrace: true,
-        errorDetails: true
-    },
+    stats: 'minimal',
     output: {
         path: path.join(__dirname, '../dist'),
         filename: utils.assetsPath('js/[name].[hash].js'),
@@ -83,10 +74,29 @@ module.exports = {
                     limit: 10240,
                     name: utils.assetsPath('media/[name].[hash:6].[ext]')
                 }
+            },
+            {
+                // 通过require('jquery')来引入
+                test: require.resolve('jquery'),
+                use: [
+                    {
+                        loader: 'expose-loader',
+                        // 暴露出去的全局变量的名称 随便你自定义
+                        options: 'jQuery'
+                    },
+                    {
+                        // 同上
+                        loader: 'expose-loader',
+                        options: '$'
+                    }
+                ]
             }
         ]
     },
     plugins: [
-
+        new webpack.ProvidePlugin({
+            jQuery: 'jquery',
+            $: 'jquery'
+        })
     ]
 };

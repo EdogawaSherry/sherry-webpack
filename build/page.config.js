@@ -20,7 +20,7 @@ function fileDisplay(filePath, callBack) {
             console.warn(err);
         } else {
             let count = 0;
-            let checkEnd = () => {
+            const checkEnd = () => {
                 ++count === files.length && callBack();
             };
             // 遍历读取到的文件列表
@@ -34,8 +34,8 @@ function fileDisplay(filePath, callBack) {
                         const isDir = stats.isDirectory();
                         if (isFile) {
                             if (/\.html$/.test(filedir)) {
-                                let filePath = filedir.replace(path.join(__dirname, fixPath) + path.sep, '').replace('.html', '');
-                                let arr = filePath.split(path.sep);
+                                const filePath = filedir.replace(path.join(__dirname, fixPath) + path.sep, '').replace('.html', '');
+                                const arr = filePath.split(path.sep);
                                 const name = arr.pop();
                                 const chunk = arr.join('/');
                                 // 得到入口文件的name 以chunk名 路径
@@ -66,13 +66,12 @@ exports.readPage = () => {
                 removeComments: true,
                 collapseWhitespace: true
             };
-            // Entries['vendor'] = ['@babel/polyfill'];
             pageInfo.forEach((page) => {
                 const htmlPlugin = new HtmlWebpackPlugin({
                     filename: `${page.chunk}.html`,
                     template: path.resolve(__dirname, `${page.filePath}.html`),
-                    // chunkName集合，page.chunk为当前入口文件chunkName commons为公共模块chunkName
-                    chunks: ['vendor', page.chunk, 'commons'], // html中script标签顺序加载
+                    // chunkName集合，page.chunk为当前入口文件chunkName common为公共模块chunkName，和正式环境抽离代码的命名有关
+                    chunks: ['common', page.chunk],
                     minify
                 });
                 HtmlPlugins.push(htmlPlugin);
