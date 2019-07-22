@@ -1,5 +1,5 @@
 # sherry-webpack
-`webpack4+es6+jq`这样的组合，不知道目前是否还有这样的需求——在这个框架盛行的时代~
+`webpack4 es6+ jq`这样的组合，不知道目前是否还有这样的需求——在这个框架盛行的时代~
 
 ### 如何使用
 * 下载 `git clone https://github.com/EdogawaSherry/sherry-webpack.git`
@@ -9,9 +9,8 @@
 
 ### 功能描述
 * 模块化、组件化开发，拼啥字符串~用`.tpl`来进行一个个组件开发吧
-* 样式预处理、自动加浏览器前缀，图片资源的处理(base64 或 路径)
+* 样式预处理、自动加浏览器前缀，资源的处理(base64 或 路径)
 * 愉快es6/es7语法，不过这里的babel配置还是比较基础的~可以自行升级
-* 资源引用处理
 * 单页面/多页面开发，多页面时候公共js/css将被抽离
 * `jquery`无需再引入，可以直接`$`使用，由`expose-loader` `webpack.ProvidePlugin`创建
 
