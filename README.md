@@ -59,7 +59,7 @@
 使用`ejs-loader`处理`.tpl`文件，这个模块可以理解成一个组件，它可以是个存`.tpl`文件，也可以由`.js``.styl`组合成一个组件来使用，使用`ejs`的语法来写模板文件，`import tpl from 'xxx.tpl'`，打印可以知道这是个函数，通过参数来渲染字符串，剩下的就可以自由发挥，无论是通过构造函数，还是class，还是普通函数来组合成模板，就看自己如何使用，详细可以参考这篇文章[webpack学习笔记(三)使用ejs语法创建模版+提取chunk](https://blog.csdn.net/yeluochen4869/article/details/80021090)
 
 ### 样式处理
-可以使用`.less` `.styl` `.scss` `.sass`来写样式，目前只是内置`.styl`，处于少一点包的理念就没加其它的`loaer`，如果想使用其它样式预处理语言，可以自行安装相关包
+可以使用`.less` `.styl` `.scss` `.sass`来写样式，目前只是内置`.styl`，出于少一点包的理念就没加其它的`loaer`，如果想使用其它样式预处理语言，可以自行安装相关包
 * .less `yarn add less less-loader` 或者 `npm i -D less less-loader`
 * .scss/.sass `yarn add node-sass sass-loader` 或者 `npm i -D node-sass sass-loader`
 
