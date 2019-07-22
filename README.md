@@ -1,5 +1,5 @@
 # sherry-webpack
-webpack+es6+jq这样的组合，不知道目前是否还有这样的需求——在这个框架盛行的时代~
+`webpack4+es6+jq`这样的组合，不知道目前是否还有这样的需求——在这个框架盛行的时代~
 
 ### 如何使用
 * 下载 `git clone https://github.com/EdogawaSherry/sherry-webpack.git`
