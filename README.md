@@ -1,4 +1,5 @@
 # sherry-webpack
+webpack+es6+jq这样的组合，不知道目前是否还有这样的需求——在这个框架盛行的时代~
 
 ### 如何使用
 * 下载 `git clone https://github.com/EdogawaSherry/sherry-webpack.git`
@@ -13,7 +14,6 @@
 * 资源引用处理
 * 单页面/多页面开发，多页面时候公共js/css将被抽离
 * `jquery`无需再引入，可以直接`$`使用，由`expose-loader` `webpack.ProvidePlugin`创建
-webpack+es6+jq这样的组合，不知道目前是否还有这样的需求——在这个框架盛行的时代~
 
 ### 目录介绍
 ```
